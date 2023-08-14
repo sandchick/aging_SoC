@@ -1,0 +1,8 @@
++libext+.v+.h+.V+.sv+
+
+-y ../../rtl/ahb_matrix
+-y ../../rtl/common
+-y ../../rtl/mem
+-y ../../rtl/readoutnet
+-y ../../rtl/head
+-y ../../rtl/aging_sensor

@@ -2,4 +2,6 @@ out/
 rpt/
 temp_lib/
 work/
-project_1/
+vivado/aging_soc/
+vivado/project_1/
+vivado/sim/

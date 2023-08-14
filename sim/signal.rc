@@ -1,0 +1,146 @@
+Magic 271485
+Revision Verdi_O-2018.09-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 27 1080 1752 258 65
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/mnt/d/PHM/code/aging_SoC/sim/work/novas.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 0.000000 295118464.749101
+cursor 150450000.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 58
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/mnt/d/PHM/code/aging_SoC/sim/work/novas.fsdb"
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/StateCr[2:0]
+addSignal -h 15 -holdScope StateNxt[2:0]
+addSignal -h 15 -holdScope UartBusy_i
+addSignal -h 15 -UNSIGNED -HEX -holdScope UartData_o[7:0]
+addSignal -h 15 -holdScope UartEmpty_i
+addSignal -h 15 -holdScope UartTrans_o
+addSignal -h 15 -holdScope clk
+addSignal -h 15 -holdScope rstn
+addGroup "G2"
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/TXD
+addSignal -h 15 -holdScope data[7:0]
+addSignal -h 15 -holdScope data_formed[9:0]
+addSignal -h 15 -holdScope state
+addSignal -h 15 -holdScope tx_en
+addSignal -expanded -h 15 -UNSIGNED -HEX /tb/x_soc/alu_monitor[4:0]
+addSignal -expanded -h 15 -UNSIGNED -HEX -holdScope iu_monitor[4:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_monitor/delay_clk
+addSignal -h 15 -holdScope warning_signal
+addSignal -h 15 -holdScope detec_window
+addSignal -h 15 -holdScope monitor_signal
+addSignal -h 15 -holdScope monitor_signal
+addSignal -h 15 -holdScope reset
+addGroup "G3"
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_mbit_counter/reset
+addSignal -h 15 -holdScope warning_signal
+addSignal -h 15 -holdScope counter[3:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_sig_extrator/aging_signal[3:0]
+addSignal -h 15 -holdScope counter[3:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/warning_signal_counter
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/alu_aging_signal[19:0]
+addSignal -h 15 -holdScope alu_aging_signal_reg[19:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/Ready_o
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_monitor/clk
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/StateCr[2:0]
+addGroup "G5"
+addSignal -h 15 -UNSIGNED -HEX /tb/x_soc/u_aging_sensor_top/u_aging2uart/UartData_o[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/data[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/UartData_o[7:0]
+addGroup "G6"
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/Data_i_iu[19:16]
+addSignal -h 15 -holdScope Data_i_iu[15:12]
+addSignal -h 15 -holdScope Data_i_iu[11:8]
+addSignal -h 15 -holdScope Data_i_iu[7:4]
+addSignal -h 15 -holdScope Data_i_iu[3:0]
+addGroup "G7"
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/Data_i_alu[19:16]
+addSignal -h 15 -holdScope Data_i_alu[15:12]
+addSignal -h 15 -holdScope Data_i_alu[11:8]
+addSignal -h 15 -holdScope Data_i_alu[7:4]
+addSignal -h 15 -holdScope Data_i_alu[3:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/FIFO/data[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/data[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/UartData_o[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_aging2uart/StateNxt[2:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope UartData_o[7:0]
+addSignal -h 15 -holdScope UartBusy_i
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/FIFO/q[7:0]
+addSignal -h 15 /tb/x_soc/u_aging_sensor_top/u_UART_TX/FIFOdata[7:0]
+addGroup "G8"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/mnt/d/PHM/code/aging_SoC/sim/work/novas.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/clic_kid_golden_ports"
+"/tb"
+"/tb/x_soc"
+"/tb/x_soc/u_DaughterBoard"
+"/tb/x_soc/u_aging_sensor_top"
+"/tb/x_soc/u_aging_sensor_top/u_UART_TX"
+"/tb/x_soc/u_aging_sensor_top/u_aging2uart"
+"/tb/x_soc/u_aging_sensor_top/u_clkuart_gen"
+
+SCOPE_LIST_BEGIN
+"/clic_kid_golden_ports"
+"/tb/x_soc/u_aging_sensor_top"
+"/tb/x_soc/u_aging_sensor_top/u_aging2uart"
+"/tb"
+"/tb/x_soc"
+"/tb/x_soc/u_aging_sensor_top/u_UART_TX"
+"/tb/x_soc/u_DaughterBoard"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[1]"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_monitor"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_mbit_counter"
+"/tb/x_soc/u_aging_sensor_top/u_alu_monitor[0]/alu_aging_sensor/u_sig_extrator"
+"/tb/x_soc/u_aging_sensor_top/u_UART_TX/FIFO"
+"/tb/x_soc/u_aging_sensor_top/u_clkuart_gen"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+
