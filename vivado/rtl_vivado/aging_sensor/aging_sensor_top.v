@@ -59,7 +59,6 @@ clkuart_gen #(
     ,.clk_out (clk_uart)
     ,.rst_n (rst_n)
 );
-wire Ready_o;
 reg [`count_window*5-1:0] alu_aging_signal_reg;
 reg [`count_window*5-1:0] iu_aging_signal_reg;
 always @ (posedge clk) begin

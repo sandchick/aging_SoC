@@ -43,10 +43,11 @@ begin
     #(`CLKNET_PERIOD/2) clk_net = ~clk_net;
   end
 end
-
+reg flash2ram_en;
 initial 
 begin
   rst_b = 0;
+  flash2ram_en = 0;
   # 10 
   rst_b = 1;
   #500000000
@@ -79,6 +80,7 @@ aging_SoC_top x_soc(
   .i_pad_jtg_tclk       ( jclk                 ),
   .i_pad_jtg_trst_b     ( jrst_b               ),
   .i_pad_jtg_nrst_b     ( jrst_b               ),
+  .i_pad_flash2ram      ( flash2ram_en),
 `ifdef JTAG_5
   .i_pad_jtg_tdi        ( jtg_tdi              ),
   .o_pad_jtg_tdo        ( jtg_tdo              ),
