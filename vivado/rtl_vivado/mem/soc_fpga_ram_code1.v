@@ -23,7 +23,8 @@ reg [(DATAWIDTH-1):0] mem [(MEMDEPTH-1):0] /* synthesis syn_ramstyle = "no_rw_ch
 reg [(DATAWIDTH-1):0] PortADataOut;
 initial 
 begin 
-	$readmemh("D:/PHM/code/aging_SoC/vivado/sim/case3.pat",mem);	
+	//$readmemh("D:/PHM/code/aging_SoC/vivado/sim/case3.pat",mem);	
+	$readmemh("D:/PHM/code/aging_SoC/vivado/sim/casetest.pat",mem);	
 end
 always @(posedge PortAClk)
 begin

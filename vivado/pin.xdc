@@ -21,17 +21,49 @@ set_property PACKAGE_PIN B16 [get_ports i_pad_rst_b]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rst_b]
 ##led
 
-set_property PACKAGE_PIN R19 [get_ports o_pad_led]
+set_property PACKAGE_PIN W22 [get_ports o_pad_led]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_led]
 
-set_property PACKAGE_PIN T20 [get_ports o_pad_ledsp]
+set_property PACKAGE_PIN W21 [get_ports o_pad_ledsp]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_ledsp]
 
-set_property PACKAGE_PIN T21 [get_ports o_pad_led_iu]
+set_property PACKAGE_PIN V22 [get_ports o_pad_led_iu]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_led_iu]
+#led display
+set_property PACKAGE_PIN AA21 [get_ports {led_data_o[0]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[0]}]
+
+set_property PACKAGE_PIN P19 [get_ports {led_data_o[1]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[1]}]
+
+set_property PACKAGE_PIN P20 [get_ports {led_data_o[2]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[2]}]
+
+set_property PACKAGE_PIN R19 [get_ports {led_data_o[3]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[3]}]
+
+set_property PACKAGE_PIN T20 [get_ports {led_data_o[4]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[4]}]
+
+set_property PACKAGE_PIN T21 [get_ports {led_data_o[5]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[5]}]
+
+set_property PACKAGE_PIN U21 [get_ports {led_data_o[6]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[6]}]
+
+set_property PACKAGE_PIN U22 [get_ports {led_data_o[7]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[7]}]
 # v ctrl
 
 set_property PACKAGE_PIN J19      [get_ports o_pad_scl]
@@ -52,14 +84,42 @@ set_property PACKAGE_PIN E14 [get_ports i_pad_jtg_nrst_b]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_nrst_b] 
 set_property PACKAGE_PIN J20 [get_ports i_pad_jtg_tclk]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tclk] 
-set_property PACKAGE_PIN J21 [get_ports i_pad_jtg_tms]
+set_property PACKAGE_PIN L13 [get_ports i_pad_jtg_tms]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tms] 
-set_property PACKAGE_PIN M15 [get_ports i_pad_jtg_trst_b]
+set_property PACKAGE_PIN M16 [get_ports i_pad_jtg_trst_b]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_trst_b] 
-set_property PACKAGE_PIN M16 [get_ports i_pad_uart0_sin]
+set_property PACKAGE_PIN H20 [get_ports i_pad_uart0_sin]
 set_property IOSTANDARD LVCMOS33 [get_ports i_pad_uart0_sin] 
-set_property PACKAGE_PIN M13 [get_ports o_pad_uart0_sout]
+set_property PACKAGE_PIN M17 [get_ports o_pad_uart0_sout]
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_uart0_sout] 
+#flash
+set_property PACKAGE_PIN A15 [get_ports i_pad_flash2ram] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash2ram] 
+set_property PACKAGE_PIN E16 [get_ports i_pad_flash_start] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash_start] 
+set_property PACKAGE_PIN B15 [get_ports i_pad_rst_flash] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rst_flash] 
+set_property PACKAGE_PIN D15 [get_ports i_pad_be] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_be] 
+set_property PACKAGE_PIN A14 [get_ports i_pad_rd] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rd] 
+
+set_property PACKAGE_PIN M18 [get_ports o_mosi]
+
+set_property IOSTANDARD LVCMOS33 [get_ports o_mosi]
+
+set_property PACKAGE_PIN M13 [get_ports i_miso]
+
+set_property IOSTANDARD LVCMOS33 [get_ports i_miso]
+
+set_property PACKAGE_PIN M15 [get_ports o_sck]
+
+set_property IOSTANDARD LVCMOS33 [get_ports o_sck]
+
+set_property PACKAGE_PIN L14 [get_ports o_cs_n]
+
+set_property IOSTANDARD LVCMOS33 [get_ports o_cs_n]
+
 
 ##loop
 

@@ -24,7 +24,19 @@ module iahb_mem_ctrl(
   mmc_lite_hresp,
   pad_biu_bigend_b,
   pad_cpu_rst_b,
-  pll_core_cpuclk
+  pll_core_cpuclk,
+  flash_mmc_mux,
+  flash_mmc_addr,
+  flash_mmc_ramwen,
+  flash_mmc_ramin0,
+  flash_mmc_ramin1,
+  flash_mmc_ramin2,
+  flash_mmc_ramin3,
+  flash_mmc_clk,
+  mmc_pad_ramout0,  
+  mmc_pad_ramout1,
+  mmc_pad_ramout2,
+  mmc_pad_ramout3
 );
 
 // &Ports; @22
@@ -39,7 +51,19 @@ input           pad_cpu_rst_b;
 input           pll_core_cpuclk;               
 output  [31:0]  mmc_lite_hrdata;               
 output          mmc_lite_hready;               
-output  [1 :0]  mmc_lite_hresp;                
+output  [1 :0]  mmc_lite_hresp;
+input      flash_mmc_mux;                      
+input      flash_mmc_clk;
+input    [7 :0]  flash_mmc_ramin0;                      
+input    [7 :0]  flash_mmc_ramin1;                      
+input    [7 :0]  flash_mmc_ramin2;                      
+input    [7 :0]  flash_mmc_ramin3;                      
+output    [7 :0]  mmc_pad_ramout0;                      
+output    [7 :0]  mmc_pad_ramout1;                      
+output    [7 :0]  mmc_pad_ramout2;                      
+output    [7 :0]  mmc_pad_ramout3;                      
+input    [16:0]  flash_mmc_addr;                      
+input    [3 :0]  flash_mmc_ramwen;                  
 
 // &Regs; @23
 reg     [16:0]  addr_holding;                  
@@ -375,33 +399,55 @@ assign ram2_din[7:0] = lite_mem_din[23:16];
 assign ram3_din[7:0] = lite_mem_din[31:24];
 assign lite_mem_dout[31:0] = {ram3_dout[7:0], ram2_dout[7:0], ram1_dout[7:0], ram0_dout[7:0]};
 
+wire    [7 :0]  ram0_din_af;                      
+wire    [7 :0]  ram0_dout_af;                     
+wire    [7 :0]  ram1_din_af;                      
+wire    [7 :0]  ram1_dout_af;                     
+wire    [7 :0]  ram2_din_af;                      
+wire    [7 :0]  ram2_dout_af;                     
+wire    [7 :0]  ram3_din_af;                      
+wire    [7 :0]  ram3_dout_af;                     
+wire    [16:0]  ram_addr_af;                      
+wire            ram_clk_af;                       
+wire    [3 :0]  ram_wen_af; 
+
+assign ram0_din_af = flash_mmc_mux ? flash_mmc_ramin0 : ram0_din;
+assign ram1_din_af = flash_mmc_mux ? flash_mmc_ramin1 : ram1_din;
+assign ram2_din_af = flash_mmc_mux ? flash_mmc_ramin2 : ram2_din;
+assign ram3_din_af = flash_mmc_mux ? flash_mmc_ramin3 : ram3_din;
+assign ram_addr_af = flash_mmc_mux ? flash_mmc_addr: ram_addr;
+assign ram_wen_af = flash_mmc_mux ? flash_mmc_ramwen : ram_wen;
+assign ram_clk_af = flash_mmc_mux ? flash_mmc_clk : ram_clk;
+
+
+
 // memory unit is in DPTHx8 size, 4 units are instanced
 soc_fpga_ram_code1 #(8, IMEM_WIDTH-2) ram0(
-  .PortAClk (ram_clk),
-  .PortAAddr(ram_addr),
-  .PortADataIn (ram0_din),
-  .PortAWriteEnable(ram_wen[0]),
+  .PortAClk (ram_clk_af),
+  .PortAAddr(ram_addr_af),
+  .PortADataIn (ram0_din_af),
+  .PortAWriteEnable(ram_wen_af[0]),
   .PortADataOut(ram0_dout));
 
 soc_fpga_ram_code2 #(8, IMEM_WIDTH-2) ram1(
-  .PortAClk (ram_clk),
-  .PortAAddr(ram_addr),
-  .PortADataIn (ram1_din),
-  .PortAWriteEnable(ram_wen[1]),
+  .PortAClk (ram_clk_af),
+  .PortAAddr(ram_addr_af),
+  .PortADataIn (ram1_din_af),
+  .PortAWriteEnable(ram_wen_af[1]),
   .PortADataOut(ram1_dout));
 
 soc_fpga_ram_code3 #(8, IMEM_WIDTH-2) ram2(
-  .PortAClk (ram_clk),
-  .PortAAddr(ram_addr),
-  .PortADataIn (ram2_din),
-  .PortAWriteEnable(ram_wen[2]),
+  .PortAClk (ram_clk_af),
+  .PortAAddr(ram_addr_af),
+  .PortADataIn (ram2_din_af),
+  .PortAWriteEnable(ram_wen_af[2]),
   .PortADataOut(ram2_dout));
 
 soc_fpga_ram_code4 #(8, IMEM_WIDTH-2) ram3(
-  .PortAClk (ram_clk),
-  .PortAAddr(ram_addr),
-  .PortADataIn (ram3_din),
-  .PortAWriteEnable(ram_wen[3]),
+  .PortAClk (ram_clk_af),
+  .PortAAddr(ram_addr_af),
+  .PortADataIn (ram3_din_af),
+  .PortAWriteEnable(ram_wen_af[3]),
   .PortADataOut(ram3_dout));
 
 // &Force("nonport", "ram_addr"); @324

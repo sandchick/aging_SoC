@@ -6,6 +6,16 @@ module aging_SoC_top(
   i_pad_jtg_tms,
   i_pad_jtg_trst_b,
   i_pad_rst_b,
+  i_pad_flash2ram,
+  i_pad_flash_start,
+  i_pad_rst_flash,
+  i_pad_be,
+  i_pad_rd,
+  i_miso,
+  o_cs_n,
+  o_sck,
+  o_mosi,
+  led_data_o,
   i_pad_uart0_sin,
   o_pad_uart0_sout,
   i_pad_clk_net_clk50M,
@@ -21,6 +31,16 @@ o_pad_led_iu,
 
 // &Ports("compare", "../src_rtl/soc_top_golden_port.v"); @25
 //input           i_pad_clk;             
+input           i_pad_flash2ram;
+input           i_pad_flash_start;
+input           i_pad_rst_flash;
+input           i_pad_be;
+input           i_pad_rd;
+input           i_miso;
+output          o_cs_n;
+output          o_sck;
+output          o_mosi;
+output  [7:0]   led_data_o;
 input           i_pad_jtg_nrst_b;      
 input           i_pad_jtg_tclk;        
 input           i_pad_jtg_trst_b;      
@@ -915,7 +935,18 @@ cmsdk_MyBusMatrixName_lite u_cmsdk_MyBusMatrixName_lite (
 //          ); @104
 
 //***********************Instance ahb slave 1    ****************************
+wire flash_mmc_mux;
 
+assign flash_mmc_mux = i_pad_flash2ram;
+
+wire flash_mmc_clk;
+assign flash_mmc_clk = flash_mmc_mux ? i_pad_clk_net_clk50M : 1'b0;
+wire [16:0] ram_addr;
+wire [3:0] ram_wen;
+wire [7:0] ram0_din;
+wire [7:0] ram1_din;
+wire [7:0] ram2_din;
+wire [7:0] ram3_din;
 // &Instance("mem_ctrl", "x_smem_ctrl"); @108
 iahb_mem_ctrl  x_iahb_mem_ctrl (
   .lite_mmc_hsel       (HSELM0),
@@ -929,22 +960,43 @@ iahb_mem_ctrl  x_iahb_mem_ctrl (
   .mmc_lite_hresp      (HRESPM0),
   .pad_biu_bigend_b    (1'b1 ),
   .pad_cpu_rst_b       (pad_cpu_rst_b      ),
-  .pll_core_cpuclk     (per_clk)
+  .pll_core_cpuclk     (per_clk),
+  .flash_mmc_mux        (flash_mmc_mux),
+  .flash_mmc_clk        (flash_mmc_clk),
+  .flash_mmc_addr       (ram_addr),
+  .flash_mmc_ramwen     (ram_wen),
+  .flash_mmc_ramin0     (ram0_din),
+  .flash_mmc_ramin1     (ram1_din),
+  .flash_mmc_ramin2     (ram2_din),
+  .flash_mmc_ramin3     (ram3_din)
 );
 
-//flash2ram_if #(
-//    .FLASH_WIDTH          (19)
-//) u_flash2ram_if (
-//    .clk                  (clk),
-//    .rst_n                (rst_n),
-//    .key_ram              (key_ram),
-//    .flash_rdata          (flash_rdata),
-//    .flash_rdata_valid    (flash_rdata_valid),
-//    .uart_valid           (uart_valid),
-//    .rd_addr              (rd_addr),
-//    .ram_dout             (ram_dout)
-//);
 //test flash
+flash_wr_rd_top #(
+    .FLASH_WIDTH      (19),
+    .IMEM_WIDTH       (19)
+) u_flash_wr_rd_top (
+    //系统输入端口
+	    .clk              (flash_mmc_clk),
+    .rst_n            (i_pad_rst_flash),
+    //按键控制端口
+	    .data_en          (i_pad_flash_start),
+    .key_be           (i_pad_be),
+    .key_rd           (i_pad_rd),
+    //spi_flash
+	    .miso             (i_miso),
+    .cs_n             (o_cs_n),
+    .sck              (o_sck),
+    .mosi             (o_mosi),
+    .led_data         (led_data_o),
+    //output to coderam
+    .ram_addr         (ram_addr),
+    .ram_wen          (ram_wen),
+    .ram0_din         (ram0_din),
+    .ram1_din         (ram1_din),
+    .ram2_din         (ram2_din),
+    .ram3_din         (ram3_din)
+);
 
 //test end
 wire [31:0] HRDATAM1;
