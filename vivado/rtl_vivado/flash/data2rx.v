@@ -1,7 +1,5 @@
-
 module data2rx (
-    input clk,
-    input clk_uart,
+    input clk_rx,
     input en,
     input rst_n,
     output wire [7:0] rx_data,
@@ -16,12 +14,12 @@ end
 reg [7:0] data_reg ;
 reg [15:0] addr;
 
-always @ (posedge clk_uart or negedge rst_n) begin
+always @ (posedge clk_rx or negedge rst_n) begin
     if(~rst_n) addr <= 16'd0;
     else if(en) addr <= addr + 1'b1;
 end
 
-always @ (posedge clk_uart or negedge rst_n) begin
+always @ (posedge clk_rx or negedge rst_n) begin
     if(~rst_n) data_reg <= 8'd0;
     else if(en) data_reg <= mem[addr];
 end
@@ -43,5 +41,5 @@ end
 //end
 //always @(posedge clk) data_reg <= 8'h0f;
 assign rx_data = data_reg;
-assign rx_valid = en ?  clk_uart : 1'b0;
+assign rx_valid = en ?  clk_rx : 1'b0;
 endmodule

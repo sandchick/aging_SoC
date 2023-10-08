@@ -17,6 +17,8 @@ module flash_wr_rd_top #(
 	output			mosi,
 
 	output 	[7:0]		led_data,
+	output wire [7:0] seg_sel,
+	output wire [5:0] bit_sel,
 	//output to coderam
     output [IMEM_WIDTH-1:0] ram_addr,
     output [3:0] ram_wen,
@@ -26,23 +28,21 @@ module flash_wr_rd_top #(
     output [7:0] ram3_din
 );
 wire [20 : 0] rd_addr;
-//seg_decode u_seg_decode (
-//    .clk        (sys_clk),
-//    .rstn       (rst_n),
-////    .data_in    (ram_data),
-//    .data_in    (ram_data),
-//    // 要显示的数据
-//    .bit_sel    (bit_sel),
-//    // 位选信号
-//    // 段选信号
-//    .seg_sel    (seg_sel)
-//);
+seg_decode u_seg_decode (
+    .clk        (sys_clk),
+    .rstn       (rst_n),
+    .data_in    (flash_rdata),
+    // 要显示的数据
+    .bit_sel    (bit_sel),
+    // 位选信号
+    // 段选信号
+    .seg_sel    (seg_sel)
+);
 //
 wire locked; 
 //(*mark_debug="true"*)wire sys_clk;
 wire sys_clk;
-`ifndef sim
-clk_wiz_0 inst
+clk_wiz_1 inst
  (
  // Clock out ports  
  .clk_out1(sys_clk),
@@ -52,10 +52,7 @@ clk_wiz_0 inst
 // Clock in ports
  .clk_in1(clk)
  );
-`else
-assign sys_clk = clk;
-`endif
- 
+
 
 parameter	WR_RD_ADDR	=	24'h00_00_00;
  
@@ -99,7 +96,7 @@ u_flash_wr(
 wire flash_addr_en;
 reg [18:0] flash_addr;
 wire [7:0] flash_rdata;
-assign led_data = flash_rdata;
+assign led_data = {flash_rdata[3:0],rx_data[3:0]};
 //flash_rd：flash读操作模块例化
 flash_rd #(
 	.WR_RD_ADDR(WR_RD_ADDR)				//数据写入地址
@@ -126,10 +123,10 @@ u_flash_rd(
 flash2ram_if #(
     .FLASH_WIDTH          (19)
 ) u_flash2ram_if (
-    .clk                  (clk),
+    .clk                  (sys_clk),
     .rst_n                (rst_n),
     .flash_rdata          (flash_rdata),
-    .flash_rdata_valid    (flash_rdata_valid),
+    .flash_rdata_valid    (flash_addr_en),
     .ram_addr             (ram_addr),
     .ram_wen              (ram_wen),
     .ram0_din             (ram0_din),
@@ -156,10 +153,20 @@ flash_wr_rd u_flash_wr_rd(
 	.mosi(mosi)
 );
 
+wire clk_rx;
+clkuart_gen #(
+    .DIV (800)
+) 
+u_clkuartrx(
+	.clk_in (sys_clk),
+	.rst_n (rst_n),
+	.clk_out (clk_rx)
+); 
+
+
 data2rx u_data2rx (
-	.clk		(sys_clk),
 	.en			(data_en),
-	.clk_uart	 (uart_clkrx),
+	.clk_rx	     (clk_rx),
     .rst_n       (rst_n),
     .rx_data     (rx_data),
     .rx_valid    (rx_valid)

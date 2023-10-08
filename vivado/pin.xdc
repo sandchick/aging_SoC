@@ -1,18 +1,18 @@
 ##UART
 
-#set_property PACKAGE_PIN Y22 [get_ports o_pad_txd]
-set_property PACKAGE_PIN AB22 [get_ports o_pad_txd]
+set_property PACKAGE_PIN Y22 [get_ports o_pad_txd]
+#set_property PACKAGE_PIN AB22 [get_ports o_pad_txd]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_txd]
 
-#set_property PACKAGE_PIN AB22 [get_ports o_pad_txdl]
-set_property PACKAGE_PIN Y22 [get_ports o_pad_txdl]
+set_property PACKAGE_PIN AB22 [get_ports o_pad_txdl]
+#set_property PACKAGE_PIN Y22 [get_ports o_pad_txdl]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_pad_txdl]
 
 set_property PACKAGE_PIN Y21 [get_ports i_pad_RXD]
 
-set_property IOSTANDARD  LVCMOS33 [get_ports i_pad_RXD]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_RXD]
 
 ##rst
 
@@ -66,43 +66,48 @@ set_property PACKAGE_PIN U22 [get_ports {led_data_o[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {led_data_o[7]}]
 # v ctrl
 
-set_property PACKAGE_PIN J19      [get_ports o_pad_scl]
+set_property PACKAGE_PIN J19 [get_ports o_pad_scl]
 
-set_property IOSTANDARD  LVCMOS33 [get_ports o_pad_scl]
+set_property IOSTANDARD LVCMOS33 [get_ports o_pad_scl]
 
-set_property PACKAGE_PIN H19      [get_ports o_pad_sda]
+set_property PACKAGE_PIN H19 [get_ports o_pad_sda]
 
-set_property IOSTANDARD  LVCMOS33 [get_ports o_pad_sda]
+set_property IOSTANDARD LVCMOS33 [get_ports o_pad_sda]
 
 ##clk 50MHz
 
 set_property PACKAGE_PIN K18 [get_ports i_pad_clk_net_clk50M]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_clk_net_clk50M] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_clk_net_clk50M]
 # cpu pad
 
 set_property PACKAGE_PIN E14 [get_ports i_pad_jtg_nrst_b]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_nrst_b] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_nrst_b]
 set_property PACKAGE_PIN J20 [get_ports i_pad_jtg_tclk]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tclk] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tclk]
 set_property PACKAGE_PIN L13 [get_ports i_pad_jtg_tms]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tms] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_tms]
 set_property PACKAGE_PIN M16 [get_ports i_pad_jtg_trst_b]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_trst_b] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_jtg_trst_b]
 set_property PACKAGE_PIN H20 [get_ports i_pad_uart0_sin]
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_uart0_sin] 
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_uart0_sin]
 set_property PACKAGE_PIN M17 [get_ports o_pad_uart0_sout]
-set_property IOSTANDARD LVCMOS33 [get_ports o_pad_uart0_sout] 
+set_property IOSTANDARD LVCMOS33 [get_ports o_pad_uart0_sout]
 #flash
-set_property PACKAGE_PIN A15 [get_ports i_pad_flash2ram] 
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash2ram] 
-set_property PACKAGE_PIN E16 [get_ports i_pad_flash_start] 
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash_start] 
-set_property PACKAGE_PIN B15 [get_ports i_pad_rst_flash] 
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rst_flash] 
-set_property PACKAGE_PIN D15 [get_ports i_pad_be] 
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_be] 
-set_property PACKAGE_PIN A14 [get_ports i_pad_rd] 
-set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rd] 
+#SW10
+set_property PACKAGE_PIN A15 [get_ports i_pad_flash2ram]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash2ram]
+#SW11
+set_property PACKAGE_PIN E16 [get_ports i_pad_flash_start]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_flash_start]
+#SW9
+set_property PACKAGE_PIN B15 [get_ports i_pad_rst_flash]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rst_flash]
+#SW8
+set_property PACKAGE_PIN D15 [get_ports i_pad_be]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_be]
+#SW7
+set_property PACKAGE_PIN A14 [get_ports i_pad_rd]
+set_property IOSTANDARD LVCMOS33 [get_ports i_pad_rd]
 
 set_property PACKAGE_PIN M18 [get_ports o_mosi]
 
@@ -120,6 +125,62 @@ set_property PACKAGE_PIN L14 [get_ports o_cs_n]
 
 set_property IOSTANDARD LVCMOS33 [get_ports o_cs_n]
 
+# DIG display
+set_property PACKAGE_PIN AA16 [get_ports {seg_sel[0]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[0]}]
+
+set_property PACKAGE_PIN AB15 [get_ports {seg_sel[1]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[1]}]
+
+set_property PACKAGE_PIN AB16 [get_ports {seg_sel[2]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[2]}]
+
+set_property PACKAGE_PIN AB17 [get_ports {seg_sel[3]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[3]}]
+
+set_property PACKAGE_PIN W14 [get_ports {seg_sel[4]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[4]}]
+
+set_property PACKAGE_PIN Y17 [get_ports {seg_sel[5]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[5]}]
+
+set_property PACKAGE_PIN AA15 [get_ports {seg_sel[6]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[6]}]
+
+set_property PACKAGE_PIN Y16 [get_ports {seg_sel[7]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {seg_sel[7]}]
+
+set_property PACKAGE_PIN AA14 [get_ports {bit_sel[5]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[5]}]
+
+set_property PACKAGE_PIN AB11 [get_ports {bit_sel[4]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[4]}]
+
+set_property PACKAGE_PIN Y13 [get_ports {bit_sel[3]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[3]}]
+
+set_property PACKAGE_PIN AA13 [get_ports {bit_sel[2]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[2]}]
+
+set_property PACKAGE_PIN AB13 [get_ports {bit_sel[1]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[1]}]
+
+set_property PACKAGE_PIN Y14 [get_ports {bit_sel[0]}]
+
+set_property IOSTANDARD LVCMOS33 [get_ports {bit_sel[0]}]
 
 ##loop
 
@@ -357,3 +418,34 @@ set_property IOSTANDARD LVCMOS33 [get_ports o_cs_n]
 ## add_cells_to_pblock [get_pblocks ALU_AGING77] [get_cells InstLM/ALURegion/ALUAgingR77/u_alu/*]
 ## add_cells_to_pblock [get_pblocks ALU_AGING77] [get_cells InstLM/ALURegion/ALUAgingR77/u_alu]
 ## resize_pblock [get_pblocks ALU_AGING77] -add {SLICE_X52Y25:SLICE_X59Y40}
+
+#create_debug_core u_ila_0 ila
+#set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+#set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+#set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+#set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_0]
+#set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+#set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+#set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+#set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+#set_property port_width 1 [get_debug_ports u_ila_0/clk]
+#connect_debug_port u_ila_0/clk [get_nets [list upll/inst/clk_10M]]
+#set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+#set_property port_width 1 [get_debug_ports u_ila_0/probe0]
+#connect_debug_port u_ila_0/probe0 [get_nets [list u_flash_wr_rd_top/cs_n]]
+#create_debug_port u_ila_0 probe
+#set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+#set_property port_width 1 [get_debug_ports u_ila_0/probe1]
+#connect_debug_port u_ila_0/probe1 [get_nets [list u_flash_wr_rd_top/miso]]
+#create_debug_port u_ila_0 probe
+#set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+#set_property port_width 1 [get_debug_ports u_ila_0/probe2]
+#connect_debug_port u_ila_0/probe2 [get_nets [list u_flash_wr_rd_top/mosi]]
+#create_debug_port u_ila_0 probe
+#set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+#set_property port_width 1 [get_debug_ports u_ila_0/probe3]
+#connect_debug_port u_ila_0/probe3 [get_nets [list u_flash_wr_rd_top/sck]]
+#set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+#set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+#set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+#connect_debug_port dbg_hub/clk [get_nets i_pad_clk]

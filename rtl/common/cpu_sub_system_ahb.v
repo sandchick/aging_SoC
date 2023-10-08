@@ -37,6 +37,7 @@ module cpu_sub_system_ahb(
   iahbl_pad_hsize,    
   iahbl_pad_hwdata,   
   iahbl_pad_hwrite,   
+  iahbl_pad_hburst,
   sys_rst,
   wakeup_req
 );
@@ -77,6 +78,7 @@ output  [2 :0]  iahbl_pad_hsize;
 output  [1 :0]  iahbl_pad_htrans;                    
 output  [31:0]  iahbl_pad_hwdata;                    
 output          iahbl_pad_hwrite;  
+output  [2:0]   iahbl_pad_hburst;
 output          corec_pmu_sleep_out; 
 output  [31:0]  core_sp;
 output          pad_had_jtg_tms_i;   

@@ -16,6 +16,8 @@ module aging_SoC_top(
   o_sck,
   o_mosi,
   led_data_o,
+  bit_sel,
+  seg_sel,
   i_pad_uart0_sin,
   o_pad_uart0_sout,
   i_pad_clk_net_clk50M,
@@ -58,6 +60,8 @@ output wire o_pad_led_iu;
 output wire o_pad_scl;
 output wire o_pad_sda;
 input wire i_pad_RXD;
+output wire [7:0] seg_sel;
+output wire [5:0] bit_sel;
 
 // &Regs; @26
 
@@ -962,7 +966,7 @@ iahb_mem_ctrl  x_iahb_mem_ctrl (
   .pad_cpu_rst_b       (pad_cpu_rst_b      ),
   .pll_core_cpuclk     (per_clk),
   .flash_mmc_mux        (flash_mmc_mux),
-  .flash_mmc_clk        (flash_mmc_clk),
+  .flash_mmc_clk        (flash_mmc_clk), //时钟疑似有问题
   .flash_mmc_addr       (ram_addr),
   .flash_mmc_ramwen     (ram_wen),
   .flash_mmc_ramin0     (ram0_din),
@@ -989,6 +993,8 @@ flash_wr_rd_top #(
     .sck              (o_sck),
     .mosi             (o_mosi),
     .led_data         (led_data_o),
+    .seg_sel            (seg_sel),
+    .bit_sel            (bit_sel),
     //output to coderam
     .ram_addr         (ram_addr),
     .ram_wen          (ram_wen),
